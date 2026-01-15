@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package blog;
+
+// Описание работы с блогом
+service BlogService {
+    // Аутентификация
+    // Регистрация
+    rpc Register(RegisterRequest) returns (AuthResponse);
+    // Вход
+    rpc Login(LoginRequest) returns (AuthResponse);
+
+    // Операции с постами 
+    // Создание поста
+    rpc CreatePost(CreatePostRequest) returns (PostResponse);
+    // Получение поста
+    rpc GetPost(GetPostRequest) returns (PostResponse);
+    // Обновление поста
+    rpc UpdatePost(UpdatePostRequest) returns (PostResponse);
+    // Удаление поста
+    rpc DeletePost(DeletePostRequest) returns (DeletePostResponse);
+    // список с постами
+    rpc ListPost(ListPostsRequest) returns (ListPostsResponse);
+}
+
+// типы для Аутентификация
+message RegisterRequest {
+    string username = 1;
+    string email = 2;
+    string password = 3;
+}
+
+message LoginRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message AuthResponse {
+    string token = 1;
+}
+
+
+// Типы для работы с постами
+message Post {
+    int64 id = 1;
+    string title = 2;
+    string content = 3;
+    string author_id = 4;
+    int64 created_at = 5;
+    optional int64 updated_at = 6;
+}
+
+message CreatePostRequest { 
+    string title = 1;
+    string content = 2;
+}
+
+message GetPostRequest {
+    int64 id = 1;
+}
+
+message UpdatePostRequest {
+    int64 id = 1;
+    optional string title = 2;
+    optional string content = 3;
+}
+
+message DeletePostRequest {
+    int64 post_id = 1;
+}
+
+message DeletePostResponse {
+    bool success = 1;
+}
+
+message PostResponse {
+    Post post = 1;
+}
+
+message ListPostsRequest {
+    int32 limit = 1;
+    int32 offset = 2;
+}
+
+message ListPostsResponse {
+    repeated Post post = 1;
+    int32 total = 2;
+    int32 limit = 3;
+    int32 offset = 4;
+}

@@ -1,0 +1,28 @@
+[workspace]
+members = [
+    "blog_cli",
+    "blog_client",
+    "blog_server",
+    "blog_wasm",
+]
+resolver = "3"
+
+[workspace.dependencies]
+async-trait = "0.1"
+anyhow = "1"
+dotenvy = "0.15"
+chrono = { version = "0.4", features = ["serde"] }
+serde = {version = "1.0", features = ["derive"]}
+serde_json = "1"
+serde_with = {version = "3.0" , features = ["chrono"] }
+prost = "0.14"
+thiserror = "2.0"
+tonic = "0.14"
+tonic-prost = "0.14"
+tonic-prost-build = "0.14"
+tracing = "0.1"
+tracing-subscriber = {version = "0.3", features = ["env-filter", "json", "chrono", "time"]}
+tokio = { version = "1", features = ["full"] }
+uuid = {version = "1", features = ["v4", "serde"]}
+futures-util = "0.3"
+reqwest = { version = "0.13", features = ["json"] } 
